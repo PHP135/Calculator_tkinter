@@ -59,7 +59,7 @@ class Calculator():
 
 
     def bind_keys(self, event):
-        try:
+        try: 
             result = eval(self.user_entry.get())
             self.user_entry.delete(0, END)
             self.user_entry.insert(0, result)
