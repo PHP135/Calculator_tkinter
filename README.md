@@ -1,3 +1,3 @@
 # Calculator_tkinter
 beta <br>
-im freaking new in py
+im freaking newbie in py
