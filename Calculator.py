@@ -106,6 +106,7 @@ class Calculator():
     def History(self):
         self.history_label = Label(text="there's no history yet" )
         self.history_label.pack()
+        # still in codin
 
 
 if __name__ == "__main__":
