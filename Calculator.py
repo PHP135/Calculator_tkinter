@@ -19,6 +19,7 @@ class Calculator():
         self.button_historical_calculator.place(x=360, y=6)
 
         # Type of calculator
+        # Still in codin
         self.label_type_of_Calculator = Label(root, text="Scientific", fg="#000000", font=("Time New Romans", 16, "bold"))
         self.label_type_of_Calculator.pack(side=TOP)
         self.label_type_of_Calculator.place(x=50,y=5)
