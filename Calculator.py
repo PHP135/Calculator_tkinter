@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from math import sqrt, pow
 
 class Calculator():
@@ -7,22 +8,14 @@ class Calculator():
         self.root.title("Calculator")
         self.icon()
         self.displayed_button()
+        self.history = []
+        self.counter = 1
 
     def icon(self):
-        # Navbar icon
-        self.navbaricon = PhotoImage(file="navbar.png")
-        self.button_nav = Button(root, image=self.navbaricon)
-        self.button_nav.place(x=0, y=0)
         # History icon
         self.historical_icon = PhotoImage(file="hisICON.png")
         self.button_historical_calculator = Button(root, image=self.historical_icon, command=self.History)
         self.button_historical_calculator.place(x=360, y=6)
-
-        # Type of calculator
-        # Still in codin
-        self.label_type_of_Calculator = Label(root, text="Scientific", fg="#000000", font=("Time New Romans", 16, "bold"))
-        self.label_type_of_Calculator.pack(side=TOP)
-        self.label_type_of_Calculator.place(x=50,y=5)
 
         # Entry
         self.user_entry = Entry(root, width=15, font=("Arial", 35, "bold"), justify=RIGHT )
@@ -88,9 +81,12 @@ class Calculator():
                 result = sqrt(float(self.user_entry.get()))
                 self.user_entry.delete(0, END)
                 self.user_entry.insert(0, result)
+                
             except ValueError:
                 self.user_entry.delete(0, END)
-                self.user_entry.insert(0, "Error")
+                self.user_entry.insert(0,"Error")
+                
+
         elif button == "x²":
             try:
                 result = pow(float(self.user_entry.get()), 2)
@@ -101,13 +97,29 @@ class Calculator():
                 self.user_entry.insert(0, "Error")
         else:
             self.user_entry.insert(END, button)
+
     
-    
- 
+
     def History(self):
-        self.history_label = Label(text="there's no history yet" )
-        self.history_label.pack()
-        # still in codin
+        if self.counter < 2:
+            history_window = Toplevel()
+            history_window.title("History")
+            
+            history_text = Entry(history_window, text="",  font=("Time New Romans" ,24, "bold"))
+            history_text.pack()
+
+            self.result = self.user_entry.get()
+            self.history.append(self.result)
+            if self.history == []:
+                history_text.insert(0, "There is no number yet")
+            
+            else:
+                for self.result in self.history:
+                    history_text.delete(0,END)
+                    history_text.insert(END, self.result)
+            self.counter += 1
+        else:
+            messagebox.showerror("Error","Hey, Please close the lastest history to open a new one")
 
 
 if __name__ == "__main__":
