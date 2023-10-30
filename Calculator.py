@@ -6,49 +6,10 @@ class Calculator():
     def __init__(self, root):
         self.root = root
         self.root.title("Calculator")
-        self.icon()
-        self.displayed_button()
         self.history = []
         self.counter = 1
 
-    def icon(self):
-        # History icon
-        self.historical_icon = PhotoImage(file="hisICON.png")
-        self.button_historical_calculator = Button(root, image=self.historical_icon, command=self.History)
-        self.button_historical_calculator.place(x=360, y=6)
-
-        # Entry
-        self.user_entry = Entry(root, width=15, font=("Arial", 35, "bold"), justify=RIGHT )
-        self.user_entry.place(x=5, y=70)
-        self.user_entry.config(borderwidth=0, relief="flat")
-
-        root.bind("<Return>", self.bind_keys)
-            
-    def displayed_button(self):
-        buttons = [
-
-
-            'sqrt', 'C', '←','/',
-            '7', '8', '9','*',
-            '4', '5', '6','+',
-            '1', '2', '3','-',
-            '0', '=','.','x²',
-            
-        ]
-
-        row = 2
-        col = 0
-
-        for buttonlayout in buttons:
-            button = Button(root, text=buttonlayout, padx=15, pady=15, font=("Arial", 24, "bold"))
-            button.grid(row=row, column=col, padx=5, pady=5)
-            button.config(command= lambda x = buttonlayout: self.button_clicked(x))
-            
-            
-            col += 1
-            if col > 3:
-                col = 0
-                row += 1
+   
 
 
     def bind_keys(self, event):
@@ -121,13 +82,53 @@ class Calculator():
         else:
             messagebox.showerror("Error","Hey, Please close the lastest history to open a new one")
 
+    def main(self):
+        
+
+        # History icon
+        self.historical_icon = PhotoImage(file="hisICON.png")
+        self.button_historical_calculator = Button(root, image=self.historical_icon, command=self.History)
+        self.button_historical_calculator.place(x=360, y=6)
+
+        # Entry
+        self.user_entry = Entry(root, width=15, font=("Arial", 35, "bold"), justify=RIGHT )
+        self.user_entry.place(x=5, y=70)
+        self.user_entry.config(borderwidth=0, relief="flat")
+
+        root.bind("<Return>", self.bind_keys)
+        buttons = [
+
+
+            'sqrt', 'C', '←','/',
+            '7', '8', '9','*',
+            '4', '5', '6','+',
+            '1', '2', '3','-',
+            '0', '=','.','x²',
+            
+        ]
+
+        row = 2
+        col = 0
+
+        for buttonlayout in buttons:
+            button = Button(root, text=buttonlayout, padx=15, pady=15, font=("Arial", 24, "bold"))
+            button.grid(row=row, column=col, padx=5, pady=5)
+            button.config(command= lambda x = buttonlayout: self.button_clicked(x))
+            
+            
+            col += 1
+            if col > 3:
+                col = 0
+                row += 1
+        root.mainloop()
 
 if __name__ == "__main__":
     root = Tk()
+    root.rowconfigure(1, weight=1)
     root.geometry("404x636")
     photo = PhotoImage(file="cal.png")
     root.iconphoto(True, photo)
-    root.rowconfigure(1, weight=1)
     calculator = Calculator(root)
-    root.mainloop()
+    calculator.main()
+    
     
